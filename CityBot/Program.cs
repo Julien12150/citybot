@@ -27,13 +27,16 @@ namespace CityBot
 		Channel ruleChannel;
 
 		List<ulong> voted = new List<ulong>();
-		ulong candidateRole = 238064642859991043;
-		ulong presidentRole = 237394706940690432;
-		ulong adminRole = 237414536389459968;
-		ulong announcementChannel = 237391208492564481;
-		ulong server = 229662782356848640;
+		ulong candidateRole;
+		ulong presidentRole;
+		ulong adminRole;
+		ulong announcementChannel;
+		ulong server;
 
 		string prefix = "$";
+
+		string botname;
+		string host;
 
 		void Start()
 		{
@@ -60,7 +63,11 @@ namespace CityBot
 						{
 							if (cmd == "citybot")
 							{
-								await e.Channel.SendMessage($"I'm a bot that handles the main function of City Island. If you want to see the available commands, type `{prefix}help`.\nCreated by Julien12150.");
+								await e.Channel.SendMessage(
+									$"I'm a bot that handles the presidential function of this server." +
+									$"If you want to see the available commands, type `{prefix}help`.\n" +
+									$"{botname} is currently being hosted by {host}." +
+									$"CityBot was created by Julien12150 for the City Island sever.");
 							}
 							else if (cmd == "help")
 							{
@@ -459,7 +466,7 @@ namespace CityBot
 						}
 						catch (Exception)
 						{
-							await e.Channel.SendMessage($"The error message is too long to display, please contact Julien12150 for this exception.");
+							await e.Channel.SendMessage($"The error message is too long to display. Please contact {host} to report the issue to <https://github.com/Julien12150/citybot/issues>");
 							Console.WriteLine(ex);
 						}
 					}
@@ -469,17 +476,9 @@ namespace CityBot
 			{
 				string token = File.ReadAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}/Julien12150/CityBot/token.txt");
 				await client.Connect(token, TokenType.Bot);
-				if (client.CurrentUser.Id != 249304387506274306)
-				{
-					Console.WriteLine("ID do not match, shutting down.");
-					await client.Disconnect();
-				}
-				else
-				{
-					client.SetStatus(UserStatus.Online);
-					client.SetGame("$citybot");
-					Open();
-				}
+				client.SetStatus(UserStatus.Online);
+				client.SetGame($"{prefix}citybot");
+				Open();
 				while (true)
 				{
 					ConsoleKey k = Console.ReadKey(true).Key;
@@ -558,7 +557,6 @@ namespace CityBot
 			}
 			p.Flush();
 			p.Close();
-			Console.WriteLine("Done.");
 			var r = new StreamWriter(new FileStream($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}/Julien12150/CityBot/rules.txt", FileMode.Create));
 			if(ruleMsg != null)
 				r.WriteLine(ruleMsg.Id);
@@ -574,9 +572,50 @@ namespace CityBot
 			}
 			r.Flush();
 			r.Close();
+			var c = new StreamWriter(new FileStream($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}/Julien12150/CityBot/config.txt", FileMode.Create));
+			r.WriteLine($"candidateRole={candidateRole}");
+			r.WriteLine($"presidentRole={presidentRole}");
+			r.WriteLine($"adminRole={adminRole}");
+			r.WriteLine($"annuoncementChannel={announcementChannel}");
+			r.WriteLine($"server={server}");
+			r.WriteLine($"prefix={prefix}");
+			r.WriteLine($"botname={botname}");
+			r.WriteLine($"host={host}");
+			c.Flush();
+			c.Close();
+			Console.WriteLine("Done.");
 		}
 		void Open()
 		{
+			try
+			{
+				var c = new StreamReader($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}/Julien12150/CityBot/config.txt");
+				string[] lines = c.ReadToEnd().Split('\n');
+				foreach (string s in lines)
+				{
+					if(s.Split('=')[0] == "candidateRole")
+						candidateRole = ulong.Parse(s.Split('=')[1]);
+					else if(s.Split('=')[0] == "presidentRole")
+						presidentRole = ulong.Parse(s.Split('=')[1]);
+					else if (s.Split('=')[0] == "adminRole")
+						adminRole = ulong.Parse(s.Split('=')[1]);
+					else if (s.Split('=')[0] == "announcementChannel")
+						announcementChannel = ulong.Parse(s.Split('=')[1]);
+					else if (s.Split('=')[0] == "server")
+						server = ulong.Parse(s.Split('=')[1]);
+					else if(s.Split('=')[0] == "prefix")
+						prefix = s.Split('=')[1];
+					else if (s.Split('=')[0] == "botname")
+						botname = s.Split('=')[1];
+					else if (s.Split('=')[0] == "host")
+						host = s.Split('=')[1];
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Couldn't read the config file. Abort!");
+				Console.WriteLine(e);
+			}
 			try
 			{
 				var f = new BinaryReader(new FileStream($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}/Julien12150/CityBot/save.dat", FileMode.Open));
