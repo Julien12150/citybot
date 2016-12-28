@@ -32,6 +32,7 @@ namespace CityBot
 		ulong adminRole;
 		ulong announcementChannel;
 		ulong server;
+		ulong mainServer = 229662782356848640;
 
 		string prefix = "$";
 
@@ -63,11 +64,25 @@ namespace CityBot
 						{
 							if (cmd == "citybot")
 							{
-								await e.Channel.SendMessage(
-									$"I'm a bot that handles the presidential function of this server." +
-									$"If you want to see the available commands, type `{prefix}help`.\n" +
-									$"{botname} is currently being hosted by {host}." +
-									$"CityBot was created by Julien12150 for the City Island sever.");
+								if(e.Server.Id == mainServer)
+									await e.Channel.SendMessage(
+										$"I'm a bot that handles the presidential function of this server. " +
+										$"If you want to see the available commands, type `{prefix}help`.\n" +
+										$"{botname} is currently being hosted by {host} and was created by Julien12150 for this sever.\n" +
+										$"If you want to contribute to the bot, or you have found a bug, go here: <https://github.com/Julien12150/citybot/>");
+								else if(botname == "Citybot" && e.Server.Id != mainServer)
+									await e.Channel.SendMessage(
+										$"I'm a bot that handles the presidential function of this server. " +
+										$"If you want to see the available commands, type `{prefix}help`.\n" +
+										$"{botname} is currently being hosted by {host} and was created by Julien12150 for the CityIsland server.\n" +
+										$"If you want to contribute to the bot, or you have found a bug, go here: <https://github.com/Julien12150/citybot/>");
+								else
+									await e.Channel.SendMessage(
+										$"I'm a bot that handles the presidential function of this server. " +
+										$"If you want to see the available commands, type `{prefix}help`.\n" +
+										$"{botname} is currently being hosted by {host}.\n" +
+										$"CityBot was created by Julien12150 for the City Island sever.\n" +
+										$"If you want to contribute to the bot, or you have found a bug, go here: <https://github.com/Julien12150/citybot/>");
 							}
 							else if (cmd == "help")
 							{
@@ -479,6 +494,7 @@ namespace CityBot
 				client.SetStatus(UserStatus.Online);
 				client.SetGame($"{prefix}citybot");
 				Open();
+				await client.CurrentUser.Edit("", botname);
 				while (true)
 				{
 					ConsoleKey k = Console.ReadKey(true).Key;

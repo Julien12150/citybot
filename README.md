@@ -13,6 +13,8 @@ Requirements: A program for developing C# programs. (ex. [Visual Studio](https:/
 
 - Open the `CityBot.sln` file inside your C# developing program, then compile the bot.
 
+NOTE: It's recommanded to have the bot being in one single server, as the bot being in multiple server has been untested.
+
 # Config
 Inside the `config.txt` file, there's most of the configuration of the bot, such as IDs of roles.
 
