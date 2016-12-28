@@ -588,17 +588,6 @@ namespace CityBot
 			}
 			r.Flush();
 			r.Close();
-			var c = new StreamWriter(new FileStream($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}/Julien12150/CityBot/config.txt", FileMode.Create));
-			r.WriteLine($"candidateRole={candidateRole}");
-			r.WriteLine($"presidentRole={presidentRole}");
-			r.WriteLine($"adminRole={adminRole}");
-			r.WriteLine($"annuoncementChannel={announcementChannel}");
-			r.WriteLine($"server={server}");
-			r.WriteLine($"prefix={prefix}");
-			r.WriteLine($"botname={botname}");
-			r.WriteLine($"host={host}");
-			c.Flush();
-			c.Close();
 			Console.WriteLine("Done.");
 		}
 		void Open()
