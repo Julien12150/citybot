@@ -13,18 +13,19 @@ Requirements: A program for developing C# programs. (ex. [Visual Studio](https:/
 
 - Open the `CityBot.sln` file inside your C# developing program, then compile the bot.
 
-# Config file
-Inside the `config.txt` file, there's most of the configuration of the bot, and IDs of roles and stuff.
+# Config
+Inside the `config.txt` file, there's most of the configuration of the bot, such as IDs of roles.
 
-You must write:
-- `candidateRole=<ID>`, and replace `<ID>` by the ID of the candidate role.
-- `presidentRole=<ID>`, and replace `<ID>` by the ID of the president role.
-- `adminRole=<ID>`, and replace `<ID>` by the ID of the admin role. (Is permanent, but might be unrecommanded to do stuff that the president can do)
-- `announcementChannel=<ID>`, and replace `<ID>` by the ID of the announcement channel.
-- `server=<ID>`, and replace `<ID>` by the ID of your server.
-- `prefix=<string>`, and replace `<string>` by any kind of string you want to be used before using a command.
-- `botname=<string>`, and replace `<string>` by how you call your bot's name.
-- `host=<string>`, and replace `<string>` by your name.
+Your config must contain:
+- `candidateRole=<ID>`, with `<ID>` replaced by the ID of the candidate role.
+- `presidentRole=<ID>`, with `<ID>` replaced by the ID of the president role.
+- `adminRole=<ID>`, with `<ID>` replaced by the ID of the admin role. (Is permanent, but might be unrecommended to do stuff that the president can do)
+- `announcementChannel=<ID>`, with `<ID>` replaced by the ID of the announcement channel.
+- `server=<ID>`, with `<ID>` replaced by the ID of your server.
+- `prefix=<string>`, with `<string>` replaced with what you want to use as a command prefix. Example: if you set it to `!`, you would run the help command with `!help`
+- `botname=<string>`, with `<string>` replaced by your bot's name.
+- `host=<string>`, with `<string>` replaced by your name.
+
 Example:
 ```
 candidateRole=238106051203510530
