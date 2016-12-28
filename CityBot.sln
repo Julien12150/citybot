@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityBot", "CityBot\CityBot.csproj", "{CC80E71C-735C-4FD6-A4D5-A0CB3B9C118E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveReader", "SaveReader\SaveReader.csproj", "{F6385A45-5E45-4DA5-8CB7-D0681C8CF886}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,5 +15,9 @@ Global
 		{CC80E71C-735C-4FD6-A4D5-A0CB3B9C118E}.Debug|x86.Build.0 = Debug|x86
 		{CC80E71C-735C-4FD6-A4D5-A0CB3B9C118E}.Release|x86.ActiveCfg = Release|x86
 		{CC80E71C-735C-4FD6-A4D5-A0CB3B9C118E}.Release|x86.Build.0 = Release|x86
+		{F6385A45-5E45-4DA5-8CB7-D0681C8CF886}.Debug|x86.ActiveCfg = Debug|x86
+		{F6385A45-5E45-4DA5-8CB7-D0681C8CF886}.Debug|x86.Build.0 = Debug|x86
+		{F6385A45-5E45-4DA5-8CB7-D0681C8CF886}.Release|x86.ActiveCfg = Release|x86
+		{F6385A45-5E45-4DA5-8CB7-D0681C8CF886}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 EndGlobal
